@@ -22,5 +22,28 @@ app.use(cors());
 app.use(express.static('website'));
 
 // Setup Server
-const port = 8080;
+const port = 8000;
 const server = app.listen(port, listener);
+
+//Get route
+app.get('/all', sendData);
+
+function sendDate(request, response) {
+    response.send(projectData);
+};
+
+//Post route
+app.post('/add', callBack);
+
+function callBack(req,res){
+    res.send('Post Recieved');
+}
+
+//Post weather
+const data=[];
+
+app.post('/weather', addWeather);
+
+function addWeather (req,res){
+    data.push(req,body);
+};
