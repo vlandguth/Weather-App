@@ -11,12 +11,6 @@ document.getElementById('generate'),addEventListener('click', performAction);
 const zipcode = document.getElementById('zip');
 const feelings = document.getElementById('feelings');
 
-// Where to put the data from OpenWeatherMap
-const date = document.getElementById('date');
-const temp = document.getElementById('temp');
-const content = document.getElementById('content');
-
-
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
@@ -35,7 +29,20 @@ const getWeatherInfo = async (baseURL, zipcode, key) => {
         return data;
     } catch (error) {
         console.log("error", error);
-        // appropriately handle the error
     }
 };
 
+const updateUI = async () => {
+    const request = await fetch('/all')
+    try{
+        const allData = await request.json()
+        console.log(allData);
+        document.getElementById('date').innerHTML = allData[0].date;
+        document.getElementById('temp').innerHTML = allData[0].weather;
+        document.getElementById('content').innerHTML = allData[0].content;
+    }
+
+    catch(error){
+        console.log('error', error)
+    }
+}

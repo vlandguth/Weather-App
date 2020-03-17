@@ -26,24 +26,26 @@ const port = 8000;
 const server = app.listen(port, listener);
 
 //Get route
+const weatherData = [];
+
 app.get('/all', sendData);
 
 function sendDate(request, response) {
     response.send(projectData);
-};
-
-//Post route
-app.post('/add', callBack);
-
-function callBack(req,res){
-    res.send('Post Recieved');
+    console.log(projectData);
 }
 
-//Post weather
-const data=[];
+//Post route
+app.post('/addWeather', addWeather);
 
-app.post('/weather', addWeather);
+function addWeather(req,res){
+    newEntry = {
+    weather: req.body.weather,
+    date: req.body.date,
+    content: req.body.content
+    }
 
-function addWeather (req,res){
-    data.push(req,body);
-};
+    weatherData.push(newEntry)
+    res.send(weatherData)
+    console.log(weatherData)
+}
