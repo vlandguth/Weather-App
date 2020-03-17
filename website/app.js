@@ -1,8 +1,8 @@
 // OpenWeatherMap API
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-const apiKey = 'a688bc9c10fc383bf3bd7bda058fb72a';
+const apiKey = '&appid=a688bc9c10fc383bf3bd7bda058fb72a';
 
-document.getElementById('generate'),addEventListener('click', performAction);
+document.getElementById('generate'), addEventListener('click', performAction);
 
 /* Global Variables */
 // Get the inputs from the user
@@ -15,14 +15,14 @@ let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
 // Get the weather data from OpenWeatherMap
 function performAction(e) {
-    getWeatherInfo(baseURL, zipcode, apiKey)
+    getWeather(baseURL, zipcode, apiKey)
 
 }
-const getWeatherInfo = async (baseURL, zipcode, key) => {
+const getWeather = async (baseURL, zipcode, key) => {
 
     const request = await fetch(baseURL + zipcode + key)
     try {
-        const data = await res.json();
+        const data = await request.json();
         console.log(data)
         return data;
     } catch (error) {
@@ -33,15 +33,17 @@ const getWeatherInfo = async (baseURL, zipcode, key) => {
 
 const updateUI = async () => {
     const request = await fetch('/all')
-    try{
+    try {
         const allData = await request.json()
         console.log(allData);
         document.getElementById('date').innerHTML = allData[0].date;
-        document.getElementById('temp').innerHTML = allData[0].weather;
+        document.getElementById('temp').innerHTML = alData[0].weather;
         document.getElementById('content').innerHTML = allData[0].content;
     }
 
-    catch(error){
+    catch (error) {
         console.log('error', error)
     }
 }
+
+updateUI();
