@@ -1,6 +1,3 @@
-// Setup empty JS object to act as endpoint for all routes
-let projectData = {};
-
 // Require Express to run server and routes
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -9,6 +6,7 @@ const fetch = require("node-fetch");
 
 // Start up an instance of app
 const app = express();
+app.use(express.static('website'));
 
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
@@ -31,8 +29,8 @@ const weatherData = [];
 app.get('/all', sendData);
 
 function sendDate(request, response) {
-    response.send(projectData);
-    console.log(projectData);
+    response.send(weatherData);
+    console.log(weatherData);
 }
 
 //Post route

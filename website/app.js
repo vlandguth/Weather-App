@@ -1,5 +1,3 @@
-import { request } from "express";
-
 // OpenWeatherMap API
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 const apiKey = 'a688bc9c10fc383bf3bd7bda058fb72a';
@@ -31,6 +29,7 @@ const getWeatherInfo = async (baseURL, zipcode, key) => {
         console.log("error", error);
     }
 };
+
 
 const updateUI = async () => {
     const request = await fetch('/all')
