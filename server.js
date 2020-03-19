@@ -8,7 +8,7 @@ let projectData = {};
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const fetch = require("node-fetch")
+const fetch = require("node-fetch");
 
 // Start up an instance of app
 const app = express();
@@ -32,14 +32,17 @@ function listener() {
 }
 
 // Get Route
-app.get('/all', getData);
+app.post('/all', getData);
 
 function getData(request, res) {
-    let zipcode = request.query.zipcode;
+    console.log('string' + JSON.stringify(request.body))
+    let zipcode = request.body.zipcode;
     fetch(baseURL + zipcode + '&units=imperial' + apiKey)
         .then((response) => response.json())
         .then((data) => {
             projectData.temp = data.main.temp;
+            projectData.feelings = request.body.feelings;
+            projectData.date = request.body.date;
             res.send(projectData);
         })
 }
